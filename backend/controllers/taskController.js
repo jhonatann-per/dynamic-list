@@ -5,9 +5,9 @@ let tarefas = [];
 
 // Criar uma nova tarefa
 exports.createTask = (req, res) => {
-    const {titulo, descricao} = req.body;
+    const {titulo, descricao, status} = req.body;
 
-    if(!titulo || !descricao){
+    if(!titulo || !descricao || !status){
         res.status(400).json({
             erro: true,
             mensagem: "Todos os campos são obrigatórios!"
@@ -17,7 +17,8 @@ exports.createTask = (req, res) => {
     const novaTarefa = {
         id: uuidv4(),
         titulo,
-        descricao
+        descricao,
+        status: ''
     };
 
     tarefas.push(novaTarefa);
@@ -29,10 +30,10 @@ exports.createTask = (req, res) => {
     });
 };
 
-// Edita as Tarefas
+// Edita a Tarefa
 exports.updateTask = (req, res) => {
     const { id } = req.params;
-    const { titulo, descricao } = req.body;
+    const { titulo, descricao, status } = req.body;
 
     const tarefa = tarefas.find(tarefa => tarefa.id === id);
 
@@ -45,6 +46,7 @@ exports.updateTask = (req, res) => {
 
     if(tarefa) tarefa.titulo = titulo;
     if(descricao) tarefa.descricao = descricao;
+    if(descricao) tarefa.status = status;
 
     return res.status(200).json({
         erro: false,
@@ -53,7 +55,7 @@ exports.updateTask = (req, res) => {
 
 };
 
-// Listar Tarefas
+// Listar todas as Tarefas
 exports.listTasks = (req, res) => {
     return res.status(200).json({
         erro: false,

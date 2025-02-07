@@ -1,0 +1,48 @@
+.task {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.task:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.task p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+.task button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.task button:hover {
+    background-color: #0056b3;
+}
+
+.task select {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    cursor: pointer;
+}
