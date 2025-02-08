@@ -5,7 +5,7 @@ export const Task = ({ task, onDelete, onEdit, onMove }) => {
         <div className={styles.task}>
             <h3>{task.titulo}</h3>
             <p>{task.descricao}</p>
-            <button onClick={() => onEdit(task)}>Editar</button>
+            <button onClick={() => onEdit(task)}>Editar</button> 
             <button onClick={() => onDelete(task.id)}>Excluir</button>
             <select value={task.status} onChange={(e) => onMove(task.id, e.target.value)}>
                 <option value="Pendente">Pendente</option>

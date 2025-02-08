@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './TaskForm.module.css';
 
 export const TaskForm = ({ onSubmit, initialTask }) => {
-    const [task, setTask] = useState(initialTask || { titulo: '', descricao: '', status: '' });
+    // Estado interno para armazenar os dados da tarefa
+    const [task, setTask] = useState({ titulo: '', descricao: '', status: 'Pendente' });
+
+    // Atualiza o estado interno quando initialTask muda
+    useEffect(() => {
+        if (initialTask) {
+            setTask(initialTask);
+        } else {
+            setTask({ titulo: '', descricao: '', status: 'Pendente' });
+        }
+    }, [initialTask]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -11,8 +21,11 @@ export const TaskForm = ({ onSubmit, initialTask }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(task);
-        setTask({ titulo: '', descricao: '', status: '' });
+        onSubmit(task); // Envia a tarefa para o onSubmit (handleAddTask ou handleEditTask)
+        if (!initialTask) {
+            // Limpa o formulário se for uma nova tarefa
+            setTask({ titulo: '', descricao: '', status: 'Pendente' });
+        }
     };
 
     return (

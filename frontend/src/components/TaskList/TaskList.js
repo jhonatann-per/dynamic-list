@@ -31,7 +31,7 @@ export const TaskList = () => {
         }
     };
 
-    const handleEditTask = async (task, updatedTask) => {
+    const handleEditTask = async (updatedTask) => {
         try {
             await updateTask(updatedTask.id, updatedTask);
             setEditingTask(null);
@@ -40,7 +40,7 @@ export const TaskList = () => {
             console.error('Erro ao editar tarefa:', error);
         }
     };
-
+ 
     const handleDeleteTask = async (id) => {
         try {
             await deleteTask(id);

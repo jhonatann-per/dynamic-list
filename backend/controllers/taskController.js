@@ -5,20 +5,31 @@ let tarefas = [];
 
 // Criar uma nova tarefa
 exports.createTask = (req, res) => {
-    const {titulo, descricao, status} = req.body;
+    const { titulo, descricao, status } = req.body;
 
-    if(!titulo || !descricao || !status){
-        res.status(400).json({
+    // Validação dos campos obrigatórios
+    if (!titulo || !descricao || !status) {
+        return res.status(400).json({
             erro: true,
             mensagem: "Todos os campos são obrigatórios!"
         });
     }
 
+    // Validação do status
+    const statusPermitidos = ["Pendente", "Em andamento", "Feito"];
+    if (!statusPermitidos.includes(status)) {
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Status inválido! Os valores permitidos são: Pendente, Em andamento, Feito."
+        });
+    }
+
+    // Cria a nova tarefa
     const novaTarefa = {
         id: uuidv4(),
         titulo,
         descricao,
-        status: ''
+        status
     };
 
     tarefas.push(novaTarefa);
@@ -26,7 +37,7 @@ exports.createTask = (req, res) => {
     return res.status(201).json({
         erro: false,
         mensagem: "Tarefa criada com sucesso",
-        tarefas: novaTarefa
+        tarefa: novaTarefa
     });
 };
 
@@ -46,7 +57,7 @@ exports.updateTask = (req, res) => {
 
     if(tarefa) tarefa.titulo = titulo;
     if(descricao) tarefa.descricao = descricao;
-    if(descricao) tarefa.status = status;
+    if(status) tarefa.status = status;
 
     return res.status(200).json({
         erro: false,
